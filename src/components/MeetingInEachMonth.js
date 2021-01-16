@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { Bar } from '@reactchartjs/react-chart.js';
 
 import './slides-common.css';
+import './MeetingInEachMonth.css';
 
 const getBestMonth = (monthObj) => {
   if (!monthObj) return null;
@@ -78,26 +79,48 @@ class MeetingInEachMonth extends React.Component {
     };
 
     return (
-      <div className="cy-slide-container">
-        <h1>How many meetings did you have each month?</h1>
-        {bestMonth && bestMonth.length == 1 && (
-          <div>
-            <p>Your busiest month is {monthFullNames[bestMonth[0].key]}</p>
-            <p>You have {bestMonth[0].value} meeting in </p>
-          </div>
-        )}
+      <div className="cy-slide-container meetings-in-each-month">
+        <div className="content">
+          <h1>How many meetings did you have each month?</h1>
+          {bestMonth && bestMonth.length == 1 && (
+            <div>
+              <h2 className="subtitle">
+                Your busiest month is{' '}
+                <span className="best-month">
+                  {monthFullNames[bestMonth[0].key]}
+                </span>
+              </h2>
+              <h2 className="subtitle">
+                You have{' '}
+                <span className="best-month">{bestMonth[0].value}</span> meeting
+                in
+              </h2>
+            </div>
+          )}
 
-        {bestMonth && bestMonth.length > 1 && (
-          <div>
-            <p>
-              Your busiest months are{' '}
-              {bestMonth.map((m) => monthFullNames[m.key]).join(', ')}
-            </p>
-            <p>You have {bestMonth[0].value} meeting in those months</p>
+          {bestMonth && bestMonth.length > 1 && (
+            <div>
+              <h2 className="subtitle">
+                Your busiest months are{' '}
+                <span className="best-month">
+                  {bestMonth.map((m) => monthFullNames[m.key]).join(', ')}
+                </span>
+              </h2>
+              <h2 className="subtitle">
+                You have{' '}
+                <span className="best-month">{bestMonth[0].value}</span> meeting
+                in those months
+              </h2>
+            </div>
+          )}
+          <div className="cy-slide-chart">
+            <Bar data={data} options={options} />
           </div>
-        )}
-        <div className="cy-slide-chart">
-          <Bar data={data} options={options} />
+        </div>{' '}
+        <div class="lines">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
         </div>
       </div>
     );

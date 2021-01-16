@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './slides-common.css';
 import axios, { post } from 'axios';
 import {
   ACTION_CALENDAR_SUMMARY_FAILED,
   ACTION_CALENDAR_SUMMARY_FULFILLED,
   ACTION_CALENDAR_SUMMARY_STARTED,
 } from '../reducers/index';
+
+import './slides-common.css';
+import './SignUp.css';
 
 // const mapStateToProps = (state) => {
 //   return {
@@ -36,7 +38,8 @@ class SignUp extends React.Component {
   // }
 
   doUpload(file) {
-    const url = 'http://localhost:3000/upload';
+    const url =
+      'https://us-west3-meetings-year-in-review.cloudfunctions.net/upload';
     const formData = new FormData();
     formData.append('calendar', file);
     const config = {
@@ -68,23 +71,27 @@ class SignUp extends React.Component {
   render() {
     return (
       <div className="cy-slide-container sign-up">
-        <h1>A lot happened in 2020</h1>
-        <h2>
-          Despite everything, you met with families, friends, and made new
-          people via online meetings. Here are a few highlights from a year to
-          remember (or you know, forget).
-        </h2>
+        <div className="content">
+          <h1 className="title">
+            More Things Than Ever Before Had Happened in 2020
+          </h1>
+          <h2 className="subtitle">
+            Despite everything, you met with families, friends, and made new
+            people via online meetings. Here are a few highlights from a year to
+            remember (or you know, <em>forget</em>).
+          </h2>
 
-        <form onSubmit={this.onFormSubmit}>
-          <label htmlFor="ics-upload-input" id="ics-upload-label">
-            Import Calendar
-          </label>
+          <form onSubmit={this.onFormSubmit}>
+            <label htmlFor="ics-upload-input" id="ics-upload-label">
+              Import Calendar
+            </label>
 
-          <input id="ics-upload-input" type="file" onChange={this.onSelect} />
-          {/* <label id="ics-upload-submit" onClick={this.onSubmit}>
+            <input id="ics-upload-input" type="file" onChange={this.onSelect} />
+            {/* <label id="ics-upload-submit" onClick={this.onSubmit}>
             Upload
           </label> */}
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

@@ -1,0 +1,54 @@
+/* zoom */
+.zoom {
+  background: #373b44; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    rgb(50, 103, 173),
+    rgb(75, 57, 153)
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgb(50, 103, 173),
+    rgb(75, 57, 153)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  text-align: left;
+}
+
+.zoom .title {
+  font-size: 6rem;
+  margin-bottom: 0.5em;
+}
+
+.zoom .group .num {
+  font-size: 4rem;
+  font-weight: 800;
+  width: 120px;
+  display: inline-block;
+  color: #081d56;
+}
+
+.zoom .group.zoom-group .num {
+  font-size: 5rem;
+  color: #f56a44;
+}
+
+.zoom .group label {
+  color: #fff;
+  font-weight: 400;
+  font-size: 2.5rem;
+  vertical-align: super;
+}
+
+.zoom .group span {
+  color: #fff;
+  font-weight: 400;
+}
+
+.zoom .cy-slide-chart {
+  position: absolute;
+  opacity: 20%;
+  z-index: 8;
+  left: 500px;
+  width: 2000px;
+  padding: 0px;
+}

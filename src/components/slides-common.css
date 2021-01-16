@@ -9,29 +9,54 @@
   align-content: space-around;
   background: linear-gradient(90deg, #7a4aef 0%, #ee83ff 98.65%), #ffffff;
 }
+.cy-slide-container .content {
+  max-width: 70%;
+  margin: 0 auto;
+}
 
 .cy-slide-chart {
   padding-left: 10%;
   padding-right: 10%;
+  width: 600px;
+  margin: 40px auto;
 }
 
-/* sign-up */
-
-.sign-up #ics-upload-input {
-  display: none;
+.cy-slide-container h1 {
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 1.2;
+  color: #fff;
 }
 
-.sign-up #ics-upload-label,
-.sign-up #ics-upload-submit {
-  border: 3px solid #111;
-  background-color: #fff;
-  display: inline-block;
-  padding: 0.5em 1em;
-  cursor: pointer;
-  min-width: 80px;
+.cy-slide-container h2 {
+  font-size: 2rem;
+  line-height: 1.6;
+  color: #fff;
+}
+/* 
+.cy-slide-container .group label {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  color: #0a070b;
 }
 
-.sign-up h1,
-.sign-up h2 {
-  color: white;
+.cy-slide-container .group span {
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1.2;
+  color: #0a070b;
+  margin-left: 1em;
+} */
+
+.total-meetings .content-wrapper {
+  /* background: #fff;
+    padding: 95px 45px 94px; */
+}
+
+/* meetings-in-each-month */
+
+.meetings-in-each-month {
+  background-color: #ffe53b;
+  background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
 }

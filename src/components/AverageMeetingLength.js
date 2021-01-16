@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { HorizontalBar } from '@reactchartjs/react-chart.js';
 
 import './slides-common.css';
+import './AverageMeetingLength.css';
 
 const mapStateToProps = (state) => {
   return {
@@ -62,25 +63,29 @@ class AverageMeetingLength extends React.Component {
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)',
           ],
-          borderWidth: 1,
+          borderWidth: 0,
         },
       ],
     };
 
     return (
-      <div className="cy-slide-container">
-        <h1>How long did you spend on meetings each day?</h1>
-        <p>
-          On average, you spent <span>{dailyAvgLen}</span> hours on meetings
-          each day.
-        </p>
-        <p>
-          On aveage, your meetings take
-          <span> {avgLen.toFixed(0)} </span>
-          mins each.
-        </p>
-        <div className="cy-slide-chart">
-          <HorizontalBar data={data} options={options} />
+      <div className="cy-slide-container average-meeting-length">
+        <div className="content">
+          <h1 className="title">
+            How long did you spend on meetings each day?
+          </h1>
+          <h2 className="subtitle wrapper">
+            On average, you spent <span className="num">{dailyAvgLen}</span>{' '}
+            hours on meetings each day.
+          </h2>
+          <h2 className="subtitle wrapper">
+            On aveage, your meetings take
+            <span className="num"> {avgLen.toFixed(0)} </span>
+            mins each.
+          </h2>
+          <div className="cy-slide-chart">
+            <HorizontalBar data={data} options={options} />
+          </div>
         </div>
       </div>
     );

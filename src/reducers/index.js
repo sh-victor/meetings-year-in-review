@@ -12,7 +12,7 @@ export const STATUS_ERROR = 'calendar/status/error';
 const initialState = {
   status: STATUS_INIT,
   error: null,
-  data: {},
+  data: data1,
 };
 
 function calendarDataReducer(state = initialState, action) {
