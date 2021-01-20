@@ -11,8 +11,9 @@ export const STATUS_ERROR = 'calendar/status/error';
 
 const initialState = {
   status: STATUS_INIT,
-  error: null,
+  id: null,
   data: data1,
+  error: null,
 };
 
 function calendarDataReducer(state = initialState, action) {
@@ -21,23 +22,27 @@ function calendarDataReducer(state = initialState, action) {
       return {
         ...state,
         status: STATUS_PENDING,
+        id: null,
         data: {},
         error: null,
       };
     }
     case ACTION_CALENDAR_SUMMARY_FULFILLED: {
+      const { id, data } = action.payload;
       return {
         ...state,
         status: STATUS_READY,
-        data: action.payload,
+        id,
+        data,
       };
     }
     case ACTION_CALENDAR_SUMMARY_FAILED: {
       return {
         ...state,
         status: STATUS_ERROR,
-        data: {},
         error: action.payload,
+        id: null,
+        data: {},
       };
     }
 

@@ -51,12 +51,12 @@ class Zoom extends React.Component {
       <div className="cy-slide-container zoom">
         <h1 className="title">Did you jump on the Zoom bandwagon?</h1>
         <div className="group zoom-group">
-          <span class="num">{zoom.ZOOM}</span>
+          <span className="num">{zoom.ZOOM}</span>
           <label>Zoom Meetings Participated</label>
           {/* <span>{`${zoomPercent}%`}</span> */}
         </div>
         <div className="group">
-          <span class="num">{zoom.in_person}</span>
+          <span className="num">{zoom.in_person}</span>
           <label>In-Person Meetings Participated</label>
           {/* <span>{`${inpersonPercent}%`}</span> */}
         </div>

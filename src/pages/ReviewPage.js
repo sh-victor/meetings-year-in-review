@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,16 +8,36 @@ import Zoom from '../components/Zoom';
 import MeetingInEachMonth from '../components/MeetingInEachMonth';
 import { STATUS_READY } from '../reducers';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const {
+    match: { params },
+  } = ownProps;
+
   return {
-    renderReport: state.calendarData.status === STATUS_READY,
+    id: params.id,
+    isReady: state.calendarData.status === STATUS_READY,
   };
 };
 
 class Review extends React.Component {
+  componentDidMount() {
+    const { id, isReady } = this.props;
+    if (!isReady) {
+      // fetch('https://api.example.com/items')
+      //   .then((res) => res.json())
+      //   .then(
+      //     (result) => {},
+      //     (error) => {}
+      //   );
+    }
+  }
+
   render() {
-    const renderReport = this.props.renderReport;
-    console.log(renderReport);
+    const { isReady } = this.props;
+
+    // if (!isReady) {
+    //   return <h1>Loading</h1>;
+    // }
 
     const swiperItems = [
       <SwiperSlide key={1}>

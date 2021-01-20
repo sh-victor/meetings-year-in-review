@@ -31,18 +31,10 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/about">
-          <AboutPage />
-        </Route>
-        <Route path="/review">
-          <ReviewPage />
-        </Route>
-        <Route path="/error">
-          <ErrorPage />
-        </Route>
-        <Route path="/">
-          <SignUpPage />
-        </Route>
+        <Route path="/about" component={AboutPage}></Route>
+        <Route path="/review/:id" component={ReviewPage}></Route>
+        <Route path="/error" component={ErrorPage}></Route>
+        <Route path="/" component={SignUpPage}></Route>
       </Switch>
     </Router>
   );

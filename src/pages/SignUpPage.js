@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { post } from 'axios';
@@ -33,21 +32,24 @@ class SignUp extends React.Component {
         'content-type': 'multipart/form-data',
       },
     };
-    this.props.dispatch({
+    const { history, dispatch } = this.props;
+
+    dispatch({
       type: ACTION_CALENDAR_SUMMARY_STARTED,
     });
-    const { history } = this.props;
     return post(url, formData, config).then(
       (response) => {
-        console.log(response.data);
-        this.props.dispatch({
+        const responseData = response.data;
+        const { id } = responseData;
+        console.log(responseData);
+        dispatch({
           type: ACTION_CALENDAR_SUMMARY_FULFILLED,
-          payload: response.data,
+          payload: responseData,
         });
-        history.push('/review');
+        history.push(`/review/${id}`);
       },
       (error) => {
-        this.props.dispatch({
+        dispatch({
           type: ACTION_CALENDAR_SUMMARY_FAILED,
           payload: error,
         });
@@ -82,4 +84,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default connect()(withRouter(SignUp));
+export default connect()(SignUp);
