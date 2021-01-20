@@ -1,41 +1,27 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import axios, { post } from 'axios';
+import { post } from 'axios';
 import {
   ACTION_CALENDAR_SUMMARY_FAILED,
   ACTION_CALENDAR_SUMMARY_FULFILLED,
   ACTION_CALENDAR_SUMMARY_STARTED,
 } from '../reducers/index';
 
-import './slides-common.css';
+// import './slides-common.css';
 import './SignUp.css';
-
-// const mapStateToProps = (state) => {
-//   return {
-//     status: state.calendarData.status,
-//   };
-// };
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   file: null,
-    // };
-    // this.onSubmit = this.onSubmit.bind(this);
     this.onSelect = this.onSelect.bind(this);
   }
 
   onSelect(e) {
     e.preventDefault();
-    // this.setState({ file: e.target.files[0] });
     this.doUpload(e.target.files[0]);
   }
-
-  // onSubmit(e) {
-  //   e.preventDefault();
-  // }
 
   doUpload(file) {
     const url =
@@ -50,7 +36,7 @@ class SignUp extends React.Component {
     this.props.dispatch({
       type: ACTION_CALENDAR_SUMMARY_STARTED,
     });
-
+    const { history } = this.props;
     return post(url, formData, config).then(
       (response) => {
         console.log(response.data);
@@ -58,19 +44,21 @@ class SignUp extends React.Component {
           type: ACTION_CALENDAR_SUMMARY_FULFILLED,
           payload: response.data,
         });
+        history.push('/review');
       },
       (error) => {
         this.props.dispatch({
           type: ACTION_CALENDAR_SUMMARY_FAILED,
           payload: error,
         });
+        history.push('/error');
       }
     );
   }
 
   render() {
     return (
-      <div className="cy-slide-container sign-up">
+      <div className="sign-up">
         <div className="content">
           <h1 className="title">
             More Things Than Ever Before Had Happened in 2020
@@ -87,9 +75,6 @@ class SignUp extends React.Component {
             </label>
 
             <input id="ics-upload-input" type="file" onChange={this.onSelect} />
-            {/* <label id="ics-upload-submit" onClick={this.onSubmit}>
-            Upload
-          </label> */}
           </form>
         </div>
       </div>
@@ -97,4 +82,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default connect()(SignUp);
+export default connect()(withRouter(SignUp));

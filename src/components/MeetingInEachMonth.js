@@ -117,10 +117,10 @@ class MeetingInEachMonth extends React.Component {
             <Bar data={data} options={options} />
           </div>
         </div>{' '}
-        <div class="lines">
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
+        <div className="lines">
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
         </div>
       </div>
     );

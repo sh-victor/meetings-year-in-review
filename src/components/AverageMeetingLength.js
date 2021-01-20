@@ -75,8 +75,9 @@ class AverageMeetingLength extends React.Component {
             How long did you spend on meetings each day?
           </h1>
           <h2 className="subtitle wrapper">
-            On average, you spent <span className="num">{dailyAvgLen}</span>{' '}
-            hours on meetings each day.
+            On average, you spent{' '}
+            <span className="num">{dailyAvgLen.toFixed(1)}</span> hours on
+            meetings each day.
           </h2>
           <h2 className="subtitle wrapper">
             On aveage, your meetings take

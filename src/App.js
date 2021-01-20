@@ -8,14 +8,12 @@ import SwiperCore, {
   A11y,
   EffectCoverflow,
 } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import SignUp from './components/SignUp';
-import TotalMeetings from './components/TotalMeetings';
-import AverageMeetingLength from './components/AverageMeetingLength';
-import Zoom from './components/Zoom';
-import MeetingInEachMonth from './components/MeetingInEachMonth';
-import { STATUS_READY } from './reducers';
+import AboutPage from './pages/AboutPage';
+import ErrorPage from './pages/ErrorPage';
+import ReviewPage from './pages/ReviewPage';
+import SignUpPage from './pages/SignUpPage';
 
 import 'swiper/swiper-bundle.css';
 import './App.css';
@@ -29,56 +27,23 @@ SwiperCore.use([
   A11y,
 ]);
 
-const mapStateToProps = (state) => {
-  return {
-    renderReport: state.calendarData.status === STATUS_READY,
-  };
-};
-
-class App extends React.Component {
-  render() {
-    const renderReport = this.props.renderReport;
-    console.log(renderReport);
-
-    const swiperItems = true
-      ? [
-          <SwiperSlide key={0}>
-            <SignUp></SignUp>
-          </SwiperSlide>,
-          <SwiperSlide key={1}>
-            <TotalMeetings></TotalMeetings>
-          </SwiperSlide>,
-          <SwiperSlide key={2}>
-            <AverageMeetingLength></AverageMeetingLength>
-          </SwiperSlide>,
-          <SwiperSlide key={3}>
-            <MeetingInEachMonth></MeetingInEachMonth>
-          </SwiperSlide>,
-          <SwiperSlide key={4}>
-            <Zoom></Zoom>
-          </SwiperSlide>,
-        ]
-      : [
-          <SwiperSlide key={0}>
-            <SignUp></SignUp>
-          </SwiperSlide>,
-        ];
-
-    return (
-      <Swiper
-        effect="fade"
-        direction="vertical"
-        mousewheel={true}
-        spaceBetween={0}
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
-      >
-        {swiperItems}
-      </Swiper>
-    );
-  }
+export default function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/about">
+          <AboutPage />
+        </Route>
+        <Route path="/review">
+          <ReviewPage />
+        </Route>
+        <Route path="/error">
+          <ErrorPage />
+        </Route>
+        <Route path="/">
+          <SignUpPage />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
-
-export default connect(mapStateToProps)(App);

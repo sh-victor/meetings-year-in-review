@@ -29,12 +29,12 @@ class TotalMeetings extends React.Component {
               <label>Total Meetings Participate:</label>
               <span>{this.props.totalPartipated}</span>
             </div>
-            <div className="group">
+            {/* <div className="group">
               <label>
                 Total Meetings Hosted: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </label>
               <span>{this.props.totalHosted}</span>
-            </div>
+            </div> */}
             <div className="group">
               <label>Total Meetings Attended:&nbsp;&nbsp;&nbsp;</label>
               <span>{this.props.totalAttended}</span>
