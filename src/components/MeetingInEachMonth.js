@@ -5,12 +5,12 @@ import * as moment from 'moment';
 import { Bar } from '@reactchartjs/react-chart.js';
 import styled from 'styled-components';
 
+import './MeetingInEachMonth.css';
 import {
   FullPageSlideContainer,
   Content,
-  Header1Smaller as Title,
-  Header2Smaller as Subtitle,
-  Stat,
+  Header1 as Title,
+  Stat as StatBase,
   ChartContainer,
 } from '../components/SlideComponents';
 
@@ -70,8 +70,6 @@ class MeetingInEachMonth extends React.Component {
       });
     }
 
-    console.log(bestMonth);
-    console.log(backgroundColors);
     const data = {
       labels: monthShortNames,
       datasets: [
@@ -85,47 +83,34 @@ class MeetingInEachMonth extends React.Component {
       ],
     };
 
+    const hasMoreThan1 = bestMonth && bestMonth.length > 1;
+
     return (
       <FullPage>
         <Content>
           <Title
             overrideClassNames={{
-              textColor: 'text-gray-100',
+              textColor: 'text-green-700',
+              textAlign: 'text-center',
             }}
           >
             How many meetings did you have each month?
           </Title>
-          {bestMonth && bestMonth.length == 1 && (
+          {bestMonth && (
             <div>
-              <Stat className="subtitle">
-                Your busiest month is{' '}
-                <span className="best-month">
-                  {monthFullNames[bestMonth[0].key]}
-                </span>
-              </Stat>
-              <Stat className="subtitle">
-                You have{' '}
-                <span className="best-month">{bestMonth[0].value}</span> meeting
-                in
+              <Stat>
+                {hasMoreThan1
+                  ? `Your busiest months are`
+                  : `Your busiest month is`}
+                <Highlight>
+                  {bestMonth.map((m) => monthFullNames[m.key]).join(', ')}
+                </Highlight>
+                , when you have <Highlight>{bestMonth[0].value}</Highlight>{' '}
+                meetings.
               </Stat>
             </div>
           )}
 
-          {bestMonth && bestMonth.length > 1 && (
-            <div>
-              <Stat className="subtitle">
-                Your busiest months are{' '}
-                <span className="best-month">
-                  {bestMonth.map((m) => monthFullNames[m.key]).join(', ')}
-                </span>
-              </Stat>
-              <Stat className="subtitle">
-                You have{' '}
-                <span className="best-month">{bestMonth[0].value}</span> meeting
-                in those months
-              </Stat>
-            </div>
-          )}
           <ChartContainer>
             <Bar data={data} options={options} />
           </ChartContainer>
@@ -144,5 +129,28 @@ const FullPage = styled(FullPageSlideContainer)`
   background-color: #f4d03f;
   background-image: linear-gradient(33deg, #f4d03f 0%, #16a085 100%);
 `;
+
+const Stat = (props) => {
+  return (
+    <StatBase
+      overrideClassNames={{
+        textColor: 'text-gray-100',
+      }}
+    >
+      {props.children}
+    </StatBase>
+  );
+};
+
+const Highlight = (props) => {
+  return (
+    <span
+      className="inline-block mx-2 text-green-900 text-semi-bond"
+      {...props}
+    >
+      {props.children}
+    </span>
+  );
+};
 
 export default connect(mapStateToProps)(MeetingInEachMonth);

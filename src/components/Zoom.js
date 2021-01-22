@@ -74,12 +74,12 @@ class Zoom extends React.Component {
           </Title>
 
           <Stat>
-            <OrangeNumber className="num">{zoom.ZOOM}</OrangeNumber>
+            <OrangeNumber>{zoom.ZOOM || 0}</OrangeNumber>
             <label>Zoom Meetings Participated</label>
           </Stat>
 
           <Stat>
-            <Number className="num">{zoom.in_person}</Number>
+            <Number>{zoom.in_person || 0}</Number>
             <label>In-Person Meetings Participated</label>
           </Stat>
 
@@ -98,10 +98,10 @@ class Zoom extends React.Component {
 }
 
 const Number = styled.span`
-  color: #081d56;
   display: inline-block;
   margin-right: 1rem;
   font-size: 150%;
+  color: #081d56;
 `;
 
 const OrangeNumber = styled(Number)`
