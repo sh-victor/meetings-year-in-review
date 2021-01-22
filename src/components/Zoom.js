@@ -15,6 +15,20 @@ const mapStateToProps = (state) => {
   };
 };
 
+const options = {
+  plugin: {
+    legend: {
+      position: 'bottom',
+      labels: {
+        fontColor: 'white',
+      },
+    },
+  },
+  legend: {
+    display: false,
+  },
+};
+
 class Zoom extends React.Component {
   buildChartData(zoom) {
     const zoomDataArr = [zoom.in_person, zoom.ZOOM];
@@ -29,16 +43,6 @@ class Zoom extends React.Component {
           borderWidth: 1,
         },
       ],
-      options: {
-        plugin: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              fontColor: 'white',
-            },
-          },
-        },
-      },
     };
     return data;
   }
@@ -89,7 +93,7 @@ class Zoom extends React.Component {
           relative opacity-80 mt-4 w-full 
           "
           >
-            <Doughnut data={data} />
+            <Doughnut data={data} options={options} />
           </div>
         </Content>
       </FullPage>

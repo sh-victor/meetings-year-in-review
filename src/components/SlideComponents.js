@@ -107,7 +107,9 @@ export const Stat = HeaderCurry('div', {
 
 export const ChartContainer = ({ className, children }) => {
   return (
-    <div className={`opacity-80 center m-auto my-4 w-2/3 ${className}`}>
+    <div
+      className={`opacity-80 center m-auto my-4 md:w-2/3 sm:w-full ${className}`}
+    >
       {children}
     </div>
   );

@@ -36,13 +36,24 @@ const mapStateToProps = (state) => {
 
 const options = {
   scales: {
+    xAxes: [
+      {
+        gridLines: {
+          display: false,
+        },
+      },
+    ],
     yAxes: [
       {
         ticks: {
           beginAtZero: true,
+          maxTicksLimit: 4,
         },
       },
     ],
+  },
+  legend: {
+    display: false,
   },
 };
 
@@ -65,8 +76,8 @@ class MeetingInEachMonth extends React.Component {
     const borderColors = new Array(12).fill('rgba(3, 3, 3, 0.2)');
     if (bestMonth && bestMonth.length) {
       bestMonth.forEach((v, k) => {
-        backgroundColors[v.key] = 'rgba(255, 99, 132, 0.2)';
-        borderColors[v.key] = 'rgba(255, 99, 132, 1)';
+        backgroundColors[v.key] = 'rgba(6,78,59)';
+        borderColors[v.key] = 'rgba(6,78,59)';
       });
     }
 
@@ -89,8 +100,9 @@ class MeetingInEachMonth extends React.Component {
       <FullPage>
         <Content>
           <Title
+            className="mb-4"
             overrideClassNames={{
-              textColor: 'text-green-700',
+              textColor: 'text-green-900',
               textAlign: 'text-center',
             }}
           >
@@ -111,11 +123,11 @@ class MeetingInEachMonth extends React.Component {
             </div>
           )}
 
-          <ChartContainer>
+          <ChartContainer className="z-50">
             <Bar data={data} options={options} />
           </ChartContainer>
         </Content>
-        <div className="lines">
+        <div className="lines hidden md:block z-10">
           <div className="line"></div>
           <div className="line"></div>
           <div className="line"></div>
@@ -134,7 +146,7 @@ const Stat = (props) => {
   return (
     <StatBase
       overrideClassNames={{
-        textColor: 'text-gray-100',
+        textColor: 'text-green-700',
       }}
     >
       {props.children}
@@ -144,10 +156,7 @@ const Stat = (props) => {
 
 const Highlight = (props) => {
   return (
-    <span
-      className="inline-block mx-2 text-green-900 text-semi-bond"
-      {...props}
-    >
+    <span className="inline-block mx-2 text-gray-100 text-semi-bond" {...props}>
       {props.children}
     </span>
   );
