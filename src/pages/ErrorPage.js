@@ -6,11 +6,11 @@ export default function Error() {
     <Container>
       <Wrapper>
         <Content>
-          <ErrorCode>404</ErrorCode>
+          <ErrorCode>Error</ErrorCode>
           <Reason>Page not found</Reason>
         </Content>
         <Anchor>
-        <Link to="/">Back to Home</Link>
+          <Link to="/">Back to Home</Link>
         </Anchor>
       </Wrapper>
     </Container>

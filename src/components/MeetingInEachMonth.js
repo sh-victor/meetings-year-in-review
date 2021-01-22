@@ -3,9 +3,16 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import * as moment from 'moment';
 import { Bar } from '@reactchartjs/react-chart.js';
+import styled from 'styled-components';
 
-import './slides-common.css';
-import './MeetingInEachMonth.css';
+import {
+  FullPageSlideContainer,
+  Content,
+  Header1Smaller as Title,
+  Header2Smaller as Subtitle,
+  Stat,
+  ChartContainer,
+} from '../components/SlideComponents';
 
 const getBestMonth = (monthObj) => {
   if (!monthObj) return null;
@@ -79,52 +86,63 @@ class MeetingInEachMonth extends React.Component {
     };
 
     return (
-      <div className="cy-slide-container meetings-in-each-month">
-        <div className="content">
-          <h1>How many meetings did you have each month?</h1>
+      <FullPage>
+        <Content>
+          <Title
+            overrideClassNames={{
+              textColor: 'text-gray-100',
+            }}
+          >
+            How many meetings did you have each month?
+          </Title>
           {bestMonth && bestMonth.length == 1 && (
             <div>
-              <h2 className="subtitle">
+              <Stat className="subtitle">
                 Your busiest month is{' '}
                 <span className="best-month">
                   {monthFullNames[bestMonth[0].key]}
                 </span>
-              </h2>
-              <h2 className="subtitle">
+              </Stat>
+              <Stat className="subtitle">
                 You have{' '}
                 <span className="best-month">{bestMonth[0].value}</span> meeting
                 in
-              </h2>
+              </Stat>
             </div>
           )}
 
           {bestMonth && bestMonth.length > 1 && (
             <div>
-              <h2 className="subtitle">
+              <Stat className="subtitle">
                 Your busiest months are{' '}
                 <span className="best-month">
                   {bestMonth.map((m) => monthFullNames[m.key]).join(', ')}
                 </span>
-              </h2>
-              <h2 className="subtitle">
+              </Stat>
+              <Stat className="subtitle">
                 You have{' '}
                 <span className="best-month">{bestMonth[0].value}</span> meeting
                 in those months
-              </h2>
+              </Stat>
             </div>
           )}
-          <div className="cy-slide-chart">
+          <ChartContainer>
             <Bar data={data} options={options} />
-          </div>
-        </div>{' '}
+          </ChartContainer>
+        </Content>
         <div className="lines">
           <div className="line"></div>
           <div className="line"></div>
           <div className="line"></div>
         </div>
-      </div>
+      </FullPage>
     );
   }
 }
+
+const FullPage = styled(FullPageSlideContainer)`
+  background-color: #f4d03f;
+  background-image: linear-gradient(33deg, #f4d03f 0%, #16a085 100%);
+`;
 
 export default connect(mapStateToProps)(MeetingInEachMonth);

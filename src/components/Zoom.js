@@ -1,9 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Doughnut } from '@reactchartjs/react-chart.js';
-
-import './slides-common.css';
-import './Zoom.css';
+import styled from 'styled-components';
+import {
+  FullPageSlideContainer,
+  Content,
+  Header1 as Title,
+  Stat,
+} from '../components/SlideComponents';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,8 +16,7 @@ const mapStateToProps = (state) => {
 };
 
 class Zoom extends React.Component {
-  render() {
-    const { zoom = {} } = this.props;
+  buildChartData(zoom) {
     const zoomDataArr = [zoom.in_person, zoom.ZOOM];
     const data = {
       labels: ['In-Person', 'Zoom'],
@@ -37,35 +40,86 @@ class Zoom extends React.Component {
         },
       },
     };
+    return data;
+  }
 
-    const zoomPercent = (
-      (zoom.ZOOM / (zoom.ZOOM + zoom.in_person)) *
-      100
-    ).toFixed(0);
-    const inpersonPercent = (
-      (zoom.in_person / (zoom.ZOOM + zoom.in_person)) *
-      100
-    ).toFixed(0);
+  render() {
+    const {
+      zoom = {
+        in_person: 0,
+        ZOOM: 0,
+      },
+    } = this.props;
+    const data = this.buildChartData(zoom);
+
+    // const zoomPercent = (
+    //   (zoom.ZOOM / (zoom.ZOOM + zoom.in_person)) *
+    //   100
+    // ).toFixed(0);
+    // const inpersonPercent = (
+    //   (zoom.in_person / (zoom.ZOOM + zoom.in_person)) *
+    //   100
+    // ).toFixed(0);
 
     return (
-      <div className="cy-slide-container zoom">
-        <h1 className="title">Did you jump on the Zoom bandwagon?</h1>
-        <div className="group zoom-group">
-          <span className="num">{zoom.ZOOM}</span>
-          <label>Zoom Meetings Participated</label>
-          {/* <span>{`${zoomPercent}%`}</span> */}
-        </div>
-        <div className="group">
-          <span className="num">{zoom.in_person}</span>
-          <label>In-Person Meetings Participated</label>
-          {/* <span>{`${inpersonPercent}%`}</span> */}
-        </div>
-        <div className="cy-slide-chart">
-          <Doughnut data={data} />
-        </div>
-      </div>
+      <FullPage className="cy-slide-container zoom">
+        <Content>
+          <Title
+            className="text-center md:text-left"
+            overrideClassNames={{
+              textColor: 'text-gray-100',
+            }}
+          >
+            Did you jump on the Zoom bandwagon?
+          </Title>
+
+          <Stat>
+            <OrangeNumber className="num">{zoom.ZOOM}</OrangeNumber>
+            <label>Zoom Meetings Participated</label>
+          </Stat>
+
+          <Stat>
+            <Number className="num">{zoom.in_person}</Number>
+            <label>In-Person Meetings Participated</label>
+          </Stat>
+
+          <div
+            className="
+          md:absolute md:opacity-20 block md:left-1/4 md:w-10/12
+          relative opacity-80 mt-4 w-full 
+          "
+          >
+            <Doughnut data={data} />
+          </div>
+        </Content>
+      </FullPage>
     );
   }
 }
+
+const Number = styled.span`
+  color: #081d56;
+  display: inline-block;
+  margin-right: 1rem;
+  font-size: 150%;
+`;
+
+const OrangeNumber = styled(Number)`
+  color: #f56a44;
+`;
+
+const FullPage = styled(FullPageSlideContainer)`
+  background: #373b44; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    rgb(50, 103, 173),
+    rgb(75, 57, 153)
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgb(50, 103, 173),
+    rgb(75, 57, 153)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+`;
 
 export default connect(mapStateToProps)(Zoom);

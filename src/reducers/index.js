@@ -11,8 +11,8 @@ export const STATUS_ERROR = 'calendar/status/error';
 
 const initialState = {
   status: STATUS_INIT,
-  id: null,
-  data: data1,
+  id: data1.id,
+  data: data1.data,
   error: null,
 };
 
